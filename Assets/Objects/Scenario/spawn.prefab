@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6966797643881795188}
   - component: {fileID: 268705060298679031}
-  - component: {fileID: 4325800504628233400}
   - component: {fileID: 1833220818519180572}
   m_Layer: 0
   m_Name: spawn
@@ -89,20 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4325800504628233400
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8019126886603257193}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2dceec2142a4234a9353c506e8ded91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy: {fileID: 0}
-  timeToSpawn: 3
 --- !u!114 &1833220818519180572
 MonoBehaviour:
   m_ObjectHideFlags: 0

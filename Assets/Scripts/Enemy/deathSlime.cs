@@ -6,9 +6,11 @@ public class deathSlime : MonoBehaviour
     private Animator animator;
     public float animationTime = 3;
     private bool startanimation = false;
+    private SimpleFlash simpleFlash;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        simpleFlash = GetComponent<SimpleFlash>();
         animator = GetComponent<Animator>();
     }
 
@@ -23,12 +25,12 @@ public class deathSlime : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Verifica se colidiu com o chão
         if (collision.gameObject.CompareTag("Trap"))
         {
             animator.SetBool("isDead", true);  // Para a animação de pulo
+            simpleFlash.Flash();
             startanimation = true;
         }
     }

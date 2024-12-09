@@ -8,15 +8,21 @@ public class PlayerMovement : MonoBehaviour
     public float deceleration = 8f;
     private Vector2 movement;
     private Rigidbody2D rb;
+    private Animator animator;
 
     void Start()
     {
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
-        movement.x = Input.GetAxisRaw("Horizontal");
+        if (animator.GetBool("isDead") == false){
+            movement.x = Input.GetAxisRaw("Horizontal");
+        }else{
+            movement.x = 0; //player tava andando quando morria pq salvava a ultima ação
+        }
     }
 
     void FixedUpdate()

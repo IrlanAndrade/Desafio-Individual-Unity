@@ -16,10 +16,12 @@ public class playerAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement   = movement.normalized;
+        if (animator.GetBool("isDead") == false){
+            movement.x = Input.GetAxisRaw("Horizontal");
+            movement   = movement.normalized;
 
-        SpriteControl();
+            SpriteControl();
+        }
     }
 
     void SpriteControl()

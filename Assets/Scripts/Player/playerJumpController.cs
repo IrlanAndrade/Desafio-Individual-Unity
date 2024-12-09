@@ -7,11 +7,14 @@ public class PlayerJumpController : MonoBehaviour
     public float fallMultiplier = 2.5f;         // Multiplicador para quando estiver caindo
     public float lowJumpMultiplier = 2f;        // Multiplicador para quando o botão de pulo é solto
     public bool isGrounded = false;             // Flag para verificar se o personagem está no chão
-
+    public GameObject check;
+    
+    private checkGround cg;
     private Rigidbody2D rb;
     private Collider2D col;
     private Collider2D platformCollider;
     private Animator animator;
+    private bool jumpStopped;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,11 +22,21 @@ public class PlayerJumpController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
         animator = GetComponent<Animator>();
+
+        jumpStopped = false;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        controlCollision();
+
+        // Animação gambiarra, não consegui pensar em nada melhor
+        if (jumpStopped == false && isGrounded == true){
+            animator.Play("Idle");
+            jumpStopped = true;
+        }
+
         // Detecta o pulo e aplica a força se estiver no chão
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
@@ -53,24 +66,37 @@ public class PlayerJumpController : MonoBehaviour
         }
     }
 
-    // Detecta quando o personagem colide com o chão
-    private void OnCollisionEnter2D(Collision2D collision)
+    void controlCollision()
     {
-        // Verifica se colidiu com o chão
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = true;  // Marca o personagem como no chão
-            animator.SetBool("isJumping", false);  // Para a animação de pulo
-        }
-    }
+        cg = check.GetComponent<checkGround>();
 
-    // Detecta quando o personagem sai de uma colisão com o chão
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        // Saiu do chão
-        if (collision.gameObject.CompareTag("Ground"))
-        {
+        if (cg.getCollide()){
+            isGrounded = true;
+            animator.SetBool("isJumping", false);
+        }else{
             isGrounded = false;  // Marca o personagem como no ar
+            jumpStopped = false;
         }
     }
+    // Detecta quando o personagem colide com o chão
+    // private void OnCollisionEnter2D(Collision2D collision)
+    // {
+    //     // Verifica se colidiu com o chão
+    //     if (collision.gameObject.CompareTag("Ground"))
+    //     {
+    //         isGrounded = true;  // Marca o personagem como no chão
+    //         animator.SetBool("isJumping", false);  // Para a animação de pulo
+    //     }
+    // }
+
+    // // Detecta quando o personagem sai de uma colisão com o chão
+    // private void OnCollisionExit2D(Collision2D collision)
+    // {
+    //     // Saiu do chão
+    //     if (collision.gameObject.CompareTag("Ground"))
+    //     {
+    //         isGrounded = false;  // Marca o personagem como no ar
+    //         jumpStopped = false;
+    //     }
+    // }
 }

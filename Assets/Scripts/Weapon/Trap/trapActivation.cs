@@ -6,6 +6,9 @@ public class trapActivation : MonoBehaviour
     private Animator animator;
     public float animationTime = 3;
     private bool startanimation = false;
+    [SerializeField]private GameObject check;
+    private checkCollision cc;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,14 +24,10 @@ public class trapActivation : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-    }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        // Verifica se colidiu com o chão
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            animator.SetBool("isActivated", true);  // Para a animação de pulo
+        cc = GetComponentInChildren<checkCollision>();
+        if (cc.getCollide() == true){
+            animator.SetBool("isActivated", true);
             startanimation = true;
         }
     }
