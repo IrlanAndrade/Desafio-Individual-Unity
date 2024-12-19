@@ -26,7 +26,6 @@ public class lifeController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         ps = player.GetComponent<playerStats>();
         life = ps.getLife();
-        Debug.Log(life);
 
         if (life == 2){Destroy(life3);}
         if (life == 1){Destroy(life2);}

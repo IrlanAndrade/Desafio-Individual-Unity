@@ -7,17 +7,18 @@ TagManager:
   - Ground
   - Enemy
   - Trap
+  - Death Object
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Traps
+  - Water
   - Water
   - UI
   - Player
   - Enemy
-  - 
-  - 
+  - Camera Collider
+  - Floor
   - 
   - 
   - 

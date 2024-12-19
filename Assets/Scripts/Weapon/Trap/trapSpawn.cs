@@ -17,8 +17,9 @@ public class trapSpawn : MonoBehaviour
     {
         GameObject player = GameObject.Find("player");
 
-        if (player.transform.localScale.x > 0){position = 1;}
-        if (player.transform.localScale.x < 0){position = -1;}
+        SpriteRenderer srflip = player.GetComponent<SpriteRenderer>();
+
+        position = srflip.flipX ? -1 : 1;
 
         jumptime -= Time.deltaTime;
         if (jumptime >= 0){

@@ -1,17 +1,21 @@
+using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 
 public class playerAttack : MonoBehaviour
 {
-    public float moveSpeed = 2f, refreshcd = 3.0f;
-    public GameObject trap;
+    [SerializeField]private float moveSpeed = 2f, refreshcd = 3.0f, actualcd;
+    [SerializeField]private GameObject trap;
+    [SerializeField]private GameObject HUD;
 
     void Start()
     {
+        HUD.GetComponentInChildren<habilitiesHUD>().triggerTrap(refreshcd);
+        // actualcd = refreshcd;
     }
     void Update()
     {
-        refreshcd -= Time.deltaTime;
-        if (refreshcd <= 0.0f){
+        actualcd += Time.deltaTime;
+        if (actualcd >= refreshcd){
             attack();
         }
     }
@@ -20,7 +24,8 @@ public class playerAttack : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             GameObject newTrap = Instantiate(trap, transform.position, Quaternion.identity);
-            refreshcd = 3.0f;
+            actualcd = 0.0f;
+            HUD.GetComponentInChildren<habilitiesHUD>().triggerTrap(refreshcd);
         }
     }
 }

@@ -6,6 +6,7 @@ public class playerSkills : MonoBehaviour
     private Rigidbody2D rb;
     public float dashForce;
     private int position = 1;
+    private SpriteRenderer sr;
 
     void Start()
     {
@@ -27,8 +28,7 @@ public class playerSkills : MonoBehaviour
     }
 
     private int getDirection(){
-        if (transform.localScale.x > 0){position = 1;}
-        if (transform.localScale.x < 0){position = -1;}
+        position = sr.GetComponent<SpriteRenderer>().flipX ? 1 : -1;
 
         return position;
     }
